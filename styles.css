@@ -1,0 +1,630 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 40px);
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: borderGradient 4s infinite;
+}
+
+.search-engines {
+    margin-bottom: 1.5rem;
+}
+
+.engine-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.8rem 1.5rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.engine-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.engine-btn.active {
+    background-color: #4285f4;
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    width: 75%;
+    animation: glowPulse 2s infinite;
+}
+
+.search-box button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #4285f4;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+    background-color: #2b6cd4;
+    transform: scale(1.05);
+}
+
+.bookmarks-container {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.bookmarks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bookmark-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bookmark-item:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bookmark-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.8rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.bookmark-item:hover .bookmark-icon {
+    transform: scale(1.1);
+}
+
+.bookmark-title {
+    font-size: 0.95rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-top: 0.5rem;
+    word-break: break-word;
+}
+
+#addBookmarkBtn {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 1rem 2rem;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#addBookmarkBtn:hover {
+    background-color: #2b6cd4;
+    transform: scale(1.05);
+}
+
+/* 统一的浮动按钮样式 */
+.float-btn {
+    position: fixed;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.6) 0%, 
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1001;
+}
+
+.float-btn i {
+    font-size: 1.2rem;
+}
+
+.float-btn:hover {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.7) 0%, 
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+#wallpaperBtn {
+    bottom: 30px;
+    right: 30px;
+}
+
+.bookmark-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.bookmark-item:hover .bookmark-actions {
+    display: flex;
+}
+
+.watermark {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.watermark:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.engine-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* AI对话区域样式 */
+.ai-chat-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    bottom: 120px;
+    width: 400px;
+    z-index: 1000;
+}
+
+.chat-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header h3 {
+    margin: 0;
+    color: white;
+}
+
+.api-settings button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.api-settings button:hover {
+    transform: rotate(45deg);
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message {
+    margin-bottom: 15px;
+    max-width: 85%;
+    line-height: 1.5;
+}
+
+.message.user {
+    margin-left: auto;
+    background-color: rgba(66, 133, 244, 0.3);
+    padding: 10px;
+    border-radius: 15px 15px 0 15px;
+}
+
+.message.ai {
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 15px 15px 15px 0;
+}
+
+.chat-input {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input textarea {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    resize: none;
+}
+
+.chat-input textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #4285f4;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-input button:hover {
+    background-color: #2b6cd4;
+    transform: scale(1.05);
+}
+
+/* 模型选择面板样式 */
+.model-settings-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1001;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.model-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-settings {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.model-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    overflow-y: auto;
+    max-height: calc(100% - 60px);
+}
+
+.model-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.model-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.model-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.model-info h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.model-info p {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* 设置面板样式 */
+.settings-panel {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1002;
+}
+
+.settings-toggle {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.settings-content {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    width: 280px;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.setting-item {
+    margin: 20px 0;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.setting-item input[type="range"] {
+    width: 100%;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.value-display {
+    display: inline-block;
+    min-width: 45px;
+    text-align: right;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 时钟样式优化 */
+.clock-container {
+    text-align: center;
+    margin: 0 auto 4rem auto;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.clock {
+    display: inline-block;
+    padding: 3rem 4rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 30px;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.clock:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.time {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.date {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+}
+
+/* 添加渐变边框效果 */
+@keyframes borderGradient {
+    0% { border-color: rgba(255, 255, 255, 0.1); }
+    50% { border-color: rgba(255, 255, 255, 0.3); }
+    100% { border-color: rgba(255, 255, 255, 0.1); }
+}
+
+/* 添加呼吸光效果 */
+@keyframes glowPulse {
+    0% { box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2); }
+    100% { box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1); }
+}
+
+/* 添加页面加载动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container > * {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.search-container { animation-delay: 0.2s; }
+.bookmarks-container { animation-delay: 0.4s; }
+.clock { animation-delay: 0s; }
+
+/* 添加毛玻璃效果的光晕 */
+.clock::before,
+.search-container::before,
+.bookmarks-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: inherit;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.05)
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 右键菜单样式 */
+.context-menu {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 5px 0;
+    min-width: 150px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-item {
+    padding: 8px 15px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.delete {
+    color: #ff4444;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 5px;
+    padding-top: 8px;
+} 

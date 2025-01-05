@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的起始页</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="settings-panel">
+        <button class="settings-toggle" id="settingsToggle">⚙️</button>
+        <div class="settings-content" style="display: none;">
+            <h3>外观设置</h3>
+            <div class="setting-item">
+                <label>背景暗度</label>
+                <input type="range" id="bgOpacity" min="0" max="100" value="40">
+                <span class="value-display">40%</span>
+            </div>
+            <div class="setting-item">
+                <label>模糊程度</label>
+                <input type="range" id="blurAmount" min="0" max="20" value="5">
+                <span class="value-display">5px</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clock-container">
+        <div class="clock">
+            <div class="time">00:00:00</div>
+            <div class="date">2024年3月21日 星期四</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 搜索栏 -->
+        <div class="search-container">
+            <div class="search-engines">
+                <button class="engine-btn" data-engine="google">
+                    <img class="engine-icon" src="https://www.google.com/favicon.ico" alt="Google">
+                    Google
+                </button>
+                <button class="engine-btn" data-engine="bing">
+                    <img class="engine-icon" src="https://www.bing.com/favicon.ico" alt="Bing">
+                    Bing
+                </button>
+                <button class="engine-btn" data-engine="baidu">
+                    <img class="engine-icon" src="https://www.baidu.com/favicon.ico" alt="Baidu">
+                    百度
+                </button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="输入关键词搜索...">
+                <button id="searchBtn">搜索</button>
+            </div>
+        </div>
+
+        <!-- 书签区域 -->
+        <div class="bookmarks-container">
+            <div class="bookmarks-grid" id="bookmarksGrid">
+                <!-- 书签将通过 JavaScript 动态添加 -->
+            </div>
+            <button id="addBookmarkBtn">+ 添加书签</button>
+        </div>
+
+        <!-- AI对话区域 -->
+        <div class="ai-chat-container">
+            <div class="chat-panel">
+                <div class="chat-header">
+                    <h3>AI助手</h3>
+                    <div class="api-settings">
+                        <button id="settingsBtn">⚙️ 设置</button>
+                    </div>
+                </div>
+                
+                <!-- 添加模型选择对话框 -->
+                <div class="model-settings-panel" style="display: none;">
+                    <div class="model-settings-header">
+                        <h3>选择AI模型</h3>
+                        <button class="close-settings">×</button>
+                    </div>
+                    <div class="model-list">
+                        <div class="model-item" data-model="openai-35">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="GPT-3.5">
+                            <div class="model-info">
+                                <h4>GPT-3.5</h4>
+                                <p>OpenAI的基础模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="openai-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="GPT-4">
+                            <div class="model-info">
+                                <h4>GPT-4</h4>
+                                <p>OpenAI的高级模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="claude-3">
+                            <img src="https://claude.ai/favicon.ico" alt="Claude">
+                            <div class="model-info">
+                                <h4>Claude 3</h4>
+                                <p>Anthropic的最新模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="gemini-pro">
+                            <img src="https://www.gstatic.com/lamda/images/favicon_v1_150160cddff7f294ce30.svg" alt="Gemini">
+                            <div class="model-info">
+                                <h4>Gemini Pro</h4>
+                                <p>Google的AI模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="qianwen">
+                            <img src="https://tongyi.aliyuncs.com/static/favicon.ico" alt="通义千问">
+                            <div class="model-info">
+                                <h4>通义千问</h4>
+                                <p>阿里云的AI模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="ernie">
+                            <img src="https://www.baidu.com/favicon.ico" alt="文心一言">
+                            <div class="model-info">
+                                <h4>文心一言</h4>
+                                <p>百度的AI模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="sparkdesk">
+                            <img src="https://www.xfyun.cn/favicon.ico" alt="讯飞星火">
+                            <div class="model-info">
+                                <h4>讯飞星火</h4>
+                                <p>科大讯飞的AI模型</p>
+                            </div>
+                        </div>
+                        <div class="model-item" data-model="custom">
+                            <i class="ri-add-line"></i>
+                            <div class="model-info">
+                                <h4>自定义模型</h4>
+                                <p>使用自定义API接口</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <textarea id="userInput" placeholder="输入消息..." rows="3"></textarea>
+                    <button id="sendBtn">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 壁纸相关 -->
+    <input type="file" id="wallpaperInput" accept="image/*" style="display: none;">
+    <button id="wallpaperBtn" class="float-btn">
+        <i class="ri-image-line"></i>
+        更换壁纸
+    </button>
+
+    <a href="https://github.com/Travisma2233" target="_blank" class="watermark">Created by Travisma2233</a>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

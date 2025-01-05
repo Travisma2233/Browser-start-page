@@ -1,0 +1,6 @@
+my-startpage/
+  ├── index.html
+  ├── styles.css
+  ├── scripts.js
+  └── assets/
+      └── icons/ 
